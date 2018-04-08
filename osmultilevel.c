@@ -18,7 +18,7 @@ int main(){
 	printf("Enter no. of processes :");
 	scanf("%d",&total_processes);
 	struct level1_process process[total_processes];
-for(i=0;i<total_processes;i++)
+for(i=0;i<total_processes;i++)//loop for getting processes details
     {		printf("Enter process id\n ");
 			scanf("%d",&process[i].process_id);
 			printf("Enter arrival time of %d :",process[i].process_id);
@@ -27,7 +27,7 @@ for(i=0;i<total_processes;i++)
                         scanf("%d",&process[i].priority);
 			printf("Enter burst time of %d :",process[i].process_id);
 			scanf("%d",&process[i].burst_t);
-                        process[i].current_burst_t=process[i].burst_t;
+                        process[i].current_burst_t=process[i].burst_t;//to store the burst time of current process
 			system("clear");//clears the screen
 			}
                  printf("Gantt chart for level 1 priority scheduling :\n");
@@ -61,7 +61,7 @@ if(i==(total_processes-1)){
 		         	}
 				printf("|%d\tprocess[%d]\t%d|",time,process[i].process_id,count);
 	break;}
-	if( count!=0 && ((count%2)==0) && (process[k+i].priority>process[i].priority))
+	if( count!=0 && ((count%2)==0) && (process[k+i].priority>process[i].priority))//compare the priorities
         {
 					printf("|%d\tprocess[%d]\t%d|",time,process[i].process_id,count);
 					time=count;
@@ -72,11 +72,11 @@ if(i==(total_processes-1)){
 					iterator=1;
 					continue;
 				}
-				else if( count!=0 && ((count%2)==0) && (process[i+k].priority < process[i].priority)){
+				else if( count!=0 && ((count%2)==0) && (process[i+k].priority < process[i].priority)){//compare the priorities
 				if(k==2){
 				printf("|%d\tprocess[%d]\t%d|",time,process[i].process_id,count);
 				check++;
-				Level_2_Ready_Queue(process[i+1]);
+				Level_2_Ready_Queue(process[i+1]);//preempt the process with low pririty to level 2 
 				i=i+1;
 				iterator=1;
 				time=count;
@@ -90,7 +90,7 @@ if(i==(total_processes-1)){
 					}flag1=0;
 					if(process[i].burst_t>0){
 						check++;
-							Level_2_Ready_Queue(process[i]);}
+							Level_2_Ready_Queue(process[i]);}//preempt the process with low pririty to level 2 
 				iterator=1;
 				time=count;
 				count++;
@@ -107,7 +107,7 @@ if(i==(total_processes-1)){
                  		}
  			}
 		}
-	Level2_Round_Robin();
+	Level2_Round_Robin();//it will execute the preempted process
 }
 void Level_2_Ready_Queue(struct level1_process queue){
 process_2[rpro].burst_t2=queue.burst_t;
